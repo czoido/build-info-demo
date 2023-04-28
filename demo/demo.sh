@@ -6,6 +6,7 @@
 
 conan remove "*" -r=develop -c
 conan remove "liba*" -c
+conan remove "mypkg*" -c
 
 conan create liba -s build_type=Release
 conan create liba -s build_type=Debug
@@ -13,6 +14,8 @@ conan create liba -s build_type=Debug
 # we upload to Artifactory, we will pick that from there
 
 conan upload "liba*" -r=develop -c
+
+conan remove "liba*" -c
 
 ##################
 # Release CI JOB #

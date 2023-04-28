@@ -32,6 +32,7 @@ them
 ```
 conan remove "*" -r=develop -c
 conan remove "liba*" -c
+conan remove "mypkg*" -c
 
 conan create liba -s build_type=Release
 conan create liba -s build_type=Debug
