@@ -37,9 +37,7 @@ conan create liba -s build_type=Debug
 
 conan upload "liba*" -r=develop -c
 
-##################
-# Release CI JOB #
-##################
+# Release CI JOB
 
 # build mypkg Release, will pick liba from Artifactory
 
@@ -57,9 +55,7 @@ conan art:property build-info-add release_build.json http://localhost:8081/artif
 
 conan art:build-info upload release_build.json http://localhost:8081/artifactory --user=admin --password=password
 
-################
-# Debug CI JOB #
-################
+# Debug CI JOB
 
 # build mypkg Debug, will pick liba from Artifactory
 
@@ -77,21 +73,17 @@ conan art:property build-info-add debug_build.json http://localhost:8081/artifac
 
 conan art:build-info upload debug_build.json http://localhost:8081/artifactory --user=admin --password=password
 
-#################
-# parent CI job #
-#################
+# parent CI job
 
 conan art:build-info append aggregated_build 1 --build-info=release_build.json --build-info=debug_build.json > aggregated_build.json
 conan art:build-info upload aggregated_build.json http://localhost:8081/artifactory --user=admin --password=password
 conan art:property build-info-add aggregated_build.json http://localhost:8081/artifactory --user=admin --password=password
 
-#################
-# Still in Beta #
-#################
+# Still in Beta
 
 conan art:build-info create-bundle aggregated_build.json develop aggregated_bundle 1.0 http://localhost:8081/artifactory test_key_pair --user=admin --password=password
-
 ```
+
 
 ## Future improvements
 
