@@ -40,6 +40,8 @@ conan create liba -s build_type=Debug
 
 conan upload "liba*" -r=develop -c
 
+conan remove "liba*" -c
+
 # Release CI JOB
 
 # build mypkg Release, will pick liba from Artifactory
