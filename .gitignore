@@ -1,2 +1,5 @@
 demo/create_release.json
 demo/release_build.json
+demo/aggregated_build.json
+demo/create_debug.json
+demo/debug_build.json
