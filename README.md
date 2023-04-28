@@ -1,6 +1,8 @@
-# Using Build Info with Conan
+Using Build Info with Conan
+===========================
 
-## Conan extensions
+Conan extensions
+----------------
 
 The custom commands to manage the Build Info currently are in the conan-extensions repo,
 it's a work in progress (completely experimental at the moment).
@@ -11,7 +13,8 @@ cd conan-extensions
 conan config install .
 ```
 
-## Demo
+Demo
+----
 
 To show basic usage of Build Info.
 
@@ -84,8 +87,8 @@ conan art:property build-info-add aggregated_build.json http://localhost:8081/ar
 conan art:build-info create-bundle aggregated_build.json develop aggregated_bundle 1.0 http://localhost:8081/artifactory test_key_pair --user=admin --password=password
 ```
 
-
-## Future improvements
+Future improvements
+-------------------
 
 https://github.com/conan-io/conan-extensions/issues
 
