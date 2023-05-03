@@ -8,8 +8,8 @@ conan remove "*" -r=develop -c
 conan remove "liba*" -c
 conan remove "mypkg*" -c
 
-conan create liba -s build_type=Release
-conan create liba -s build_type=Debug
+conan create liba -s build_type=Release --build="liba*"
+conan create liba -s build_type=Debug --build="liba*"
 
 # we upload to Artifactory, we will pick that from there
 
@@ -23,11 +23,11 @@ conan remove "liba*" -c
 
 # build mypkg Release, will pick liba from Artifactory
 
-conan create mypkg --format=json -s build_type=Release --build="mypkg*" > create_release.json
+conan create mypkg --format=json -s build_type=Release --build="mypkg*" -r=develop > create_release.json
 
 conan upload "mypkg*" -r=develop -c
 
-# create the Build Info for Release and set the properties to the Artifacts in Artifactory
+# create the Build Info for Release
 
 conan art:build-info create create_release.json release_build 1 develop --url=http://localhost:8081/artifactory --user=admin --password=password --with-dependencies > release_build.json
 
@@ -43,13 +43,13 @@ conan art:build-info upload release_build.json http://localhost:8081/artifactory
 
 # build mypkg Debug, will pick liba from Artifactory
 
-conan create mypkg --format=json -s build_type=Debug --build="mypkg*" > create_debug.json
+conan create mypkg --format=json -s build_type=Debug --build="mypkg*" -r=develop  > create_debug.json
 
 conan upload "mypkg*" -r=develop -c
 
-# create the Build Info for Debug and set the properties to the Artifacts in Artifactory
+# create the Build Info for Debug
 
-conan art:build-info create create_release.json release_build 1 develop --url=http://localhost:8081/artifactory --user=admin --password=password --with-dependencies > release_build.json
+conan art:build-info create create_debug.json debug_build 1 develop --url=http://localhost:8081/artifactory --user=admin --password=password --with-dependencies > debug_build.json
 
 conan art:property build-info-add debug_build.json http://localhost:8081/artifactory --user=admin --password=password
 
