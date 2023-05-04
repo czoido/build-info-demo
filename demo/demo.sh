@@ -31,8 +31,6 @@ conan upload "mypkg*" -r=develop -c
 
 conan art:build-info create create_release.json release_build 1 develop --url=http://localhost:8081/artifactory --user=admin --password=password --with-dependencies > release_build.json
 
-conan art:property build-info-add release_build.json http://localhost:8081/artifactory --user=admin --password=password
-
 # Upload the Build Info
 
 conan art:build-info upload release_build.json http://localhost:8081/artifactory --user=admin --password=password
@@ -51,8 +49,6 @@ conan upload "mypkg*" -r=develop -c
 
 conan art:build-info create create_debug.json debug_build 1 develop --url=http://localhost:8081/artifactory --user=admin --password=password --with-dependencies > debug_build.json
 
-conan art:property build-info-add debug_build.json http://localhost:8081/artifactory --user=admin --password=password
-
 # Upload the Build Info
 
 conan art:build-info upload debug_build.json http://localhost:8081/artifactory --user=admin --password=password
@@ -61,9 +57,8 @@ conan art:build-info upload debug_build.json http://localhost:8081/artifactory -
 # parent CI job #
 #################
 
-conan art:build-info append aggregated_build 1 --build-info=release_build.json --build-info=debug_build.json > aggregated_build.json
+conan art:build-info append aggregated_build 1 http://localhost:8081/artifactory --build-info=debug_build,1 --build-info=release_build,1 --user=admin --password=password > aggregated_build.json
 conan art:build-info upload aggregated_build.json http://localhost:8081/artifactory --user=admin --password=password
-conan art:property build-info-add aggregated_build.json http://localhost:8081/artifactory --user=admin --password=password
 
 #################
 # Still in Beta #
