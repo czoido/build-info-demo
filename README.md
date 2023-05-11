@@ -47,7 +47,7 @@ conan remove "liba*" -c
 
 # build mypkg Release, will pick liba from Artifactory
 
-conan create mypkg --format=json -s build_type=Release --build="mypkg*" > create_release.json
+conan create mypkg --format=json -s build_type=Release --build="mypkg*" -r=develop> create_release.json
 
 conan upload "mypkg*" -r=develop -c
 
@@ -65,7 +65,7 @@ conan art:build-info upload release_build.json http://localhost:8081/artifactory
 
 # build mypkg Debug, will pick liba from Artifactory
 
-conan create mypkg --format=json -s build_type=Debug --build="mypkg*" > create_debug.json
+conan create mypkg --format=json -s build_type=Debug --build="mypkg*" -r=develop> create_debug.json
 
 conan upload "mypkg*" -r=develop -c
 
@@ -81,9 +81,8 @@ conan art:build-info upload debug_build.json http://localhost:8081/artifactory -
 
 # parent CI job
 
-conan art:build-info append aggregated_build 1 --build-info=release_build.json --build-info=debug_build.json > aggregated_build.json
+conan art:build-info append aggregated_build 1 http://localhost:8081/artifactory --build-info=release_build,1 --build-info=debug_build,1 --user=admin --password=password > aggregated_build.json
 conan art:build-info upload aggregated_build.json http://localhost:8081/artifactory --user=admin --password=password
-conan art:property build-info-add aggregated_build.json http://localhost:8081/artifactory --user=admin --password=password
 
 # Still in Beta
 
