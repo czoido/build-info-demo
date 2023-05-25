@@ -3,3 +3,6 @@ demo/release_build.json
 demo/aggregated_build.json
 demo/create_debug.json
 demo/debug_build.json
+demo/conan_home/**
+.DS_Store
+demo/.DS_Store
