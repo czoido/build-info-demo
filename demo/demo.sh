@@ -33,7 +33,7 @@ conan art:build-info create create_release.json release_build 1 develop --url=ht
 
 # Upload the Build Info
 
-conan art:build-info upload release_build.json http://localhost:8081/artifactory --user=admin --password=password
+conan art:build-info upload release_build.json --url=http://localhost:8081/artifactory --user=admin --password=password
 
 ################
 # Debug CI JOB #
@@ -51,17 +51,17 @@ conan art:build-info create create_debug.json debug_build 1 develop --url=http:/
 
 # Upload the Build Info
 
-conan art:build-info upload debug_build.json http://localhost:8081/artifactory --user=admin --password=password
+conan art:build-info upload debug_build.json --url=http://localhost:8081/artifactory --user=admin --password=password
 
 #################
 # parent CI job #
 #################
 
-conan art:build-info append aggregated_build 1 http://localhost:8081/artifactory --build-info=debug_build,1 --build-info=release_build,1 --user=admin --password=password > aggregated_build.json
-conan art:build-info upload aggregated_build.json http://localhost:8081/artifactory --user=admin --password=password
+conan art:build-info append aggregated_build 1 --url=http://localhost:8081/artifactory --build-info=debug_build,1 --build-info=release_build,1 --user=admin --password=password > aggregated_build.json
+conan art:build-info upload aggregated_build.json --url=http://localhost:8081/artifactory --user=admin --password=password
 
 #################
 # Still in Beta #
 #################
 
-conan art:build-info create-bundle aggregated_build.json develop aggregated_bundle 1.0 http://localhost:8081/artifactory test_key_pair --user=admin --password=password
+conan art:build-info create-bundle aggregated_build.json develop aggregated_bundle 1.0 --url=http://localhost:8081/artifactory test_key_pair --user=admin --password=password
