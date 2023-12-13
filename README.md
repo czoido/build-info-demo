@@ -8,9 +8,7 @@ The custom commands to manage the Build Info currently are in the conan-extensio
 it's a work in progress (completely experimental at the moment).
 
 ```
-git clone https://github.com/conan-io/conan-extensions.git
-cd conan-extensions
-conan config install .
+conan config install https://github.com/conan-io/conan-extensions.git
 ```
 
 Demo
